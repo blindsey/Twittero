@@ -7,15 +7,28 @@
 //
 
 #import "AppDelegate.h"
+#import "AFOAuth1Client.h"
+#import "User.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(login) name:UserDidLoginNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logout) name:UserDidLogoutNotification object:nil];
+
+    [User checkUserAuthorization];
     return YES;
 }
-							
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    NSNotification *notification = [NSNotification notificationWithName:kAFApplicationLaunchedWithURLNotification object:nil userInfo:[NSDictionary dictionaryWithObject:url forKey:kAFApplicationLaunchOptionsURLKey]];
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    return YES;
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -41,6 +54,22 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+# pragma mark - Private methods
+
+- (void)login
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SignedIn"];
+    self.window.rootViewController = controller;
+}
+
+- (void)logout
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"SignedOut"];
+    self.window.rootViewController = controller;
 }
 
 @end
