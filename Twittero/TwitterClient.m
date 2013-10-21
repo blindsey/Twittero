@@ -94,20 +94,20 @@
 
 - (void)retweetWithStatusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"trim_user" : @"true"}];
+    NSDictionary *params = @{@"trim_user" : @"true"};
     NSString *path = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", statusId];
     [self postPath:path parameters:params success:success failure:failure];
 }
 
 - (void)favoriteWithStatusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusId}];
+    NSDictionary *params = @{@"id": statusId};
     [self postPath:@"1.1/favorites/create.json" parameters:params success:success failure:failure];
 }
 
 - (void)unfavoriteWithStatusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"id": statusId}];
+    NSDictionary *params = @{@"id": statusId};
     [self postPath:@"1.1/favorites/destroy.json" parameters:params success:success failure:failure];
 }
 @end
