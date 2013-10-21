@@ -95,7 +95,7 @@
 - (void)retweetWithStatusId:(NSString *)statusId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:@{@"trim_user" : @"true"}];
-    NSString *path = [NSString stringWithFormat:@"1.1/status/retweet/%@.json", statusId];
+    NSString *path = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", statusId];
     [self postPath:path parameters:params success:success failure:failure];
 }
 
