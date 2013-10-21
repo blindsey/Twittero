@@ -18,7 +18,8 @@
 
 @property (strong, nonatomic) NSArray *tweets; // of Tweet
 
-- (void)reload;
+- (void)refresh;
+- (IBAction)onLoadMoreButton;
 - (IBAction)onSignOutButton;
 
 @end
@@ -45,10 +46,10 @@
     [bar setTitleTextAttributes:attributes];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(refresh) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refreshControl;
     [self.refreshControl beginRefreshing];
-    [self reload];
+    [self refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -66,19 +67,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.tweets count];
+    NSInteger count = [self.tweets count];
+    return count > 0 ? count + 1 : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"TweetCell";
-    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.tweet = self.tweets[indexPath.row];
-    return cell;
+    if (indexPath.row == [self.tweets count]) {
+        return [tableView dequeueReusableCellWithIdentifier:@"MoreCell" forIndexPath:indexPath];
+    } else {
+        TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+        cell.tweet = self.tweets[indexPath.row];
+        return cell;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == [self.tweets count]) {
+        return 32;
+    }
     Tweet *tweet = self.tweets[indexPath.row];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tweet.text];
     NSRange range = NSMakeRange(0, [string length]);
@@ -112,7 +120,7 @@
     [User setCurrentUser:nil];
 }
 
-- (void)reload
+- (void)refresh
 {
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         //NSLog(@"%@", response);
@@ -125,5 +133,16 @@
     }];
 }
 
+- (IBAction)onLoadMoreButton
+{
+    Tweet *tweet = [self.tweets lastObject];
+    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
+        self.tweets = [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@", error);
+        // Do nothing
+    }];
+}
 
 @end
