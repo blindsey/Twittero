@@ -84,7 +84,8 @@
     NSRange range = NSMakeRange(0, [string length]);
     [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
     
-    CGRect frame = [string boundingRectWithSize:CGSizeMake(241, 1000)
+    CGFloat width = self.view.frame.size.width - 79;
+    CGRect frame = [string boundingRectWithSize:CGSizeMake(width, 1000)
                                         options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
                                         context:nil];
     return MAX(68.0, frame.size.height + 30);
