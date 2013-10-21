@@ -14,34 +14,18 @@ NSString * const UserDidLogoutNotification = @"UserDidLogoutNotification";
 
 @implementation User
 
-- (NSString *)name
+- (id)initWithDictionary:(NSDictionary *)data
 {
-    return [super stringValueForKey:@"name"];
-}
-
-- (NSString *)screenName
-{
-    return [super stringValueForKey:@"screen_name"];
-}
-
-- (NSString *)profileImageURL
-{
-    return [super stringValueForKey:@"profile_image_url"];
-}
-
-- (NSInteger)statusesCount
-{
-    return [super intValueForKey:@"statuses_count"];
-}
-
-- (NSInteger)followersCount
-{
-    return [super intValueForKey:@"followers_count"];
-}
-
-- (NSInteger)friendsCount
-{
-    return [super intValueForKey:@"friends_count"];
+    self = [self init];
+    if (self) {
+        _name = [data objectForKey:@"name"];
+        _screenName = [data objectForKey:@"screen_name"];
+        _profileImageURL = [data objectForKey:@"profile_image_url"];
+        _statusesCount = [[data objectForKey:@"statuses_count"] integerValue];
+        _followersCount = [[data objectForKey:@"followers_count"] integerValue];
+        _friendsCount = [[data objectForKey:@"friends_count"] integerValue];
+    }
+    return self;
 }
 
 static User *_currentUser;

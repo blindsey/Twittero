@@ -7,20 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RestObject.h"
 
 extern NSString *const UserDidLoginNotification;
 extern NSString *const UserDidLogoutNotification;
 
-@interface User : RestObject
+@interface User : NSObject
 
-- (NSString *)name;
-- (NSString *)screenName;
-- (NSString *)profileImageURL;
+- (id)initWithDictionary:(NSDictionary *)data;
 
-- (NSInteger)statusesCount;
-- (NSInteger)followersCount;
-- (NSInteger)friendsCount;
+@property (strong, nonatomic, readonly) NSString *name;
+@property (strong, nonatomic, readonly) NSString *screenName;
+@property (strong, nonatomic, readonly) NSString *profileImageURL;
+
+@property (assign, nonatomic, readonly) NSInteger statusesCount;
+@property (assign, nonatomic, readonly) NSInteger followersCount;
+@property (assign, nonatomic, readonly) NSInteger friendsCount;
 
 + (void)checkUserAuthorization;
 + (void)setCurrentUser:(User *)user;

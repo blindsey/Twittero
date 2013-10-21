@@ -9,19 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 
-@interface Tweet : RestObject {
-    NSNumber *_retweeted; // overrides data setting
-    NSNumber *_favorited; // overrides data setting
-}
+@interface Tweet : NSObject
 
-- (NSString *)id;
-- (NSString *)text;
-- (NSDate *)createdAt;
-- (NSInteger)favoriteCount;
-- (NSInteger)retweetCount;
-- (NSArray *)userMentions; // of NSDictionary
+- (id)initWithDictionary:(NSDictionary *)data;
 
-- (User *)user;
+@property (strong, nonatomic, readonly) NSString *id;
+@property (strong, nonatomic, readonly) NSString *text;
+
+@property (strong, nonatomic, readonly) NSDate *createdAt;
+
+@property (assign, nonatomic, readonly) NSInteger favoriteCount;
+@property (assign, nonatomic, readonly) NSInteger retweetCount;
+
+@property (strong, nonatomic, readonly) NSArray *userMentions; // of NSDictionary
+
+@property (strong, nonatomic, readonly) User *user;
 
 @property (assign, nonatomic) BOOL retweeted;
 @property (assign, nonatomic) BOOL favorited;

@@ -10,68 +10,30 @@
 
 @implementation Tweet
 
-- (NSString *)id
+- (id)initWithDictionary:(NSDictionary *)data
 {
-    return [super stringValueForKey:@"id_str"];
-}
+    self = [self init];
+    if (self) {
+        _id = [data objectForKey:@"id_str"];
+        _text = [data objectForKey:@"text"];
 
-- (NSString *)text
-{
-    return [super stringValueForKey:@"text"];
-}
+        static NSDateFormatter *formatter = nil; //cached
+        if (!formatter) {
+            formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"EE MM dd HH:mm:ss ZZZ yyyy"];
+        }
+        _createdAt = [formatter dateFromString:[data objectForKey:@"created_at"]];
 
-- (NSDate *)createdAt
-{
-    return [super dateValueForKey:@"created_at"];
-}
+        _retweetCount = [[data objectForKey:@"retweet_count"] integerValue];
+        _favoriteCount = [[data objectForKey:@"favorite_count"] integerValue];
 
-- (NSInteger)retweetCount
-{
-    return [super intValueForKey:@"retweet_count"];
-}
+        _userMentions = [data valueForKeyPath:@"entities.user_mentions"];
+        _user = [[User alloc] initWithDictionary:[data objectForKey:@"user"]];
 
-- (NSInteger)favoriteCount
-{
-    return [super intValueForKey:@"favorite_count"];
-}
-
-- (NSArray *)userMentions
-{
-    return [self.data valueForKeyPath:@"entities.user_mentions"];
-}
-
-- (User*)user
-{
-    NSDictionary *dict = [self.data objectForKey:@"user"];
-    return [[User alloc] initWithDictionary:dict];
-}
-
-- (void)setRetweeted:(BOOL)retweeted
-{
-    _retweeted = @(retweeted);
-}
-
-- (BOOL)retweeted
-{
-    if (_retweeted != nil) {
-        return [_retweeted boolValue];
-    } else {
-        return [super intValueForKey:@"retweeted"];
+        _retweeted = [[data objectForKey:@"retweeted"] integerValue];
+        _favorited = [[data objectForKey:@"favorited"] integerValue];
     }
-}
-
-- (void)setFavorited:(BOOL)favorited
-{
-    _favorited = @(favorited);
-}
-
-- (BOOL)favorited
-{
-    if (_favorited != nil) {
-        return [_favorited boolValue];
-    } else {
-        return [super intValueForKey:@"favorited"];
-    }
+    return self;
 }
 
 + (NSArray *)tweetsWithArray:(NSArray *)array

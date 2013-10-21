@@ -29,7 +29,6 @@
 		13115BBD1812470200CE2B49 /* TwitterClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 13115BBC1812470200CE2B49 /* TwitterClient.m */; };
 		13115BC018124A9000CE2B49 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 13115BBF18124A9000CE2B49 /* User.m */; };
 		13115BC318124E9300CE2B49 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13115BC218124E9300CE2B49 /* ComposeViewController.m */; };
-		13115BD21814E5C800CE2B49 /* RestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 13115BD11814E5C800CE2B49 /* RestObject.m */; };
 		13115BDB1814F43000CE2B49 /* compose.png in Resources */ = {isa = PBXBuildFile; fileRef = 13115BD41814F43000CE2B49 /* compose.png */; };
 		13115BDC1814F43000CE2B49 /* favorite.png in Resources */ = {isa = PBXBuildFile; fileRef = 13115BD51814F43000CE2B49 /* favorite.png */; };
 		13115BDD1814F43000CE2B49 /* favorited.png in Resources */ = {isa = PBXBuildFile; fileRef = 13115BD61814F43000CE2B49 /* favorited.png */; };
@@ -83,8 +82,6 @@
 		13115BBF18124A9000CE2B49 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		13115BC118124E9300CE2B49 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		13115BC218124E9300CE2B49 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
-		13115BD01814E5C800CE2B49 /* RestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestObject.h; sourceTree = "<group>"; };
-		13115BD11814E5C800CE2B49 /* RestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestObject.m; sourceTree = "<group>"; };
 		13115BD41814F43000CE2B49 /* compose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = compose.png; path = Images/compose.png; sourceTree = "<group>"; };
 		13115BD51814F43000CE2B49 /* favorite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = favorite.png; path = Images/favorite.png; sourceTree = "<group>"; };
 		13115BD61814F43000CE2B49 /* favorited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = favorited.png; path = Images/favorited.png; sourceTree = "<group>"; };
@@ -208,8 +205,6 @@
 				13115BBF18124A9000CE2B49 /* User.m */,
 				13115BB81812469200CE2B49 /* Tweet.h */,
 				13115BB91812469200CE2B49 /* Tweet.m */,
-				13115BD01814E5C800CE2B49 /* RestObject.h */,
-				13115BD11814E5C800CE2B49 /* RestObject.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -382,7 +377,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				13115BB71812461B00CE2B49 /* TweetViewController.m in Sources */,
-				13115BD21814E5C800CE2B49 /* RestObject.m in Sources */,
 				13115B9118123FEB00CE2B49 /* SignedOutViewController.m in Sources */,
 				13115BC018124A9000CE2B49 /* User.m in Sources */,
 				13115BC318124E9300CE2B49 /* ComposeViewController.m in Sources */,
