@@ -9,6 +9,7 @@
 #import "TweetViewController.h"
 #import "TwitterClient.h"
 #import "ComposeViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface TweetViewController ()
 
@@ -51,8 +52,7 @@
     User *user = self.tweet.user;
     
     NSURL *url = [NSURL URLWithString:user.profileImageURL];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
-    self.imageView.image = image;
+    [self.imageView setImageWithURL:url];
     self.imageView.layer.cornerRadius = 5.0;
     self.imageView.layer.masksToBounds = YES;
     
