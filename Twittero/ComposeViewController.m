@@ -88,8 +88,7 @@
 
 - (IBAction)onCancelButton
 {
-    self.navigationController.navigationBarHidden = NO;
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onTweetButton
@@ -97,8 +96,7 @@
     self.tweetButton.enabled = NO;
     [[TwitterClient instance] tweetWithStatus:self.textView.text inReplyToStatusId:self.tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
         self.tweetButton.enabled = YES;
-        self.navigationController.navigationBarHidden = NO;
-        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
         [[[UIAlertView alloc] initWithTitle:@"Success" message:@"Tweeted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         self.tweetButton.enabled = YES;
