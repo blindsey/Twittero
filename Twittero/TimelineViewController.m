@@ -17,9 +17,9 @@
 @interface TimelineViewController ()
 
 @property (strong, nonatomic) NSArray *tweets; // of Tweet
+@property (assign, nonatomic) BOOL loading;
 
 - (void)refresh;
-- (IBAction)onLoadMoreButton;
 - (IBAction)onSignOutButton;
 
 @end
@@ -67,27 +67,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = [self.tweets count];
-    return count > 0 ? count + 1 : 0;
+    return [self.tweets count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == [self.tweets count]) {
-        return [tableView dequeueReusableCellWithIdentifier:@"MoreCell" forIndexPath:indexPath];
-    } else {
-        TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
-        cell.tweet = self.tweets[indexPath.row];
-        return cell;
-    }
+    TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell" forIndexPath:indexPath];
+    cell.tweet = self.tweets[indexPath.row];
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == [self.tweets count]) {
-        return 32;
-    }
-    
     Tweet *tweet = self.tweets[indexPath.row];
     CGFloat width = self.view.frame.size.width - 79;
     NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14] };
@@ -96,6 +87,26 @@
                                          attributes:attributes
                                             context:nil];
     return MAX(68.0, frame.size.height + 30);
+}
+
+#pragma mark - Scroll view delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat actualPosition = scrollView.contentOffset.y;
+    CGFloat contentHeight = scrollView.contentSize.height - 500;
+    if (actualPosition >= contentHeight && !self.loading) {
+        Tweet *tweet = [self.tweets lastObject];
+        self.loading = YES;
+        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
+            self.tweets = [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            [self.tableView reloadData];
+            self.loading = NO;
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@", error);
+            self.loading = NO;
+        }];
+    }
 }
 
 #pragma mark - segue
@@ -121,23 +132,13 @@
 
 - (void)refresh
 {
+    self.loading = YES;
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
         //NSLog(@"%@", response);
         self.tweets = [Tweet tweetsWithArray:response];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-        // Do nothing
-    }];
-}
-
-- (IBAction)onLoadMoreButton
-{
-    Tweet *tweet = [self.tweets lastObject];
-    [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:tweet.id success:^(AFHTTPRequestOperation *operation, id response) {
-        self.tweets = [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
-        [self.tableView reloadData];
+        self.loading = NO;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@", error);
         // Do nothing

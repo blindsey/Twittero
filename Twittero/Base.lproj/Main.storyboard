@@ -121,30 +121,6 @@
                                     <segue destination="Q51-ec-LvJ" kind="push" identifier="TweetView" id="FG2-7F-hUN"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="MoreCell" rowHeight="32" id="7QT-67-Tie">
-                                <rect key="frame" x="0.0" y="98" width="320" height="32"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7QT-67-Tie" id="mgC-7e-Vg0">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5g-TC-fqn">
-                                            <rect key="frame" x="123" y="0.0" width="74" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" title="Load more">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="onLoadMoreButton" destination="hEQ-an-ujx" eventType="touchUpInside" id="jsc-QU-S26"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="s5g-TC-fqn" firstAttribute="centerX" secondItem="mgC-7e-Vg0" secondAttribute="centerX" id="blO-n2-d9C"/>
-                                        <constraint firstItem="s5g-TC-fqn" firstAttribute="top" secondItem="mgC-7e-Vg0" secondAttribute="top" id="vSC-zt-P2w"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="UzO-05-F8h">
@@ -541,6 +517,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Pmf-XJ-Q6L"/>
+        <segue reference="7rE-gi-8ZD"/>
     </inferredMetricsTieBreakers>
 </document>
