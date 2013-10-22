@@ -87,15 +87,14 @@
     if (indexPath.row == [self.tweets count]) {
         return 32;
     }
-    Tweet *tweet = self.tweets[indexPath.row];
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:tweet.text];
-    NSRange range = NSMakeRange(0, [string length]);
-    [string addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:range];
     
+    Tweet *tweet = self.tweets[indexPath.row];
     CGFloat width = self.view.frame.size.width - 79;
-    CGRect frame = [string boundingRectWithSize:CGSizeMake(width, 1000)
-                                        options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                        context:nil];
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14] };
+    CGRect frame = [tweet.text boundingRectWithSize:CGSizeMake(width, 1000)
+                                            options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                         attributes:attributes
+                                            context:nil];
     return MAX(68.0, frame.size.height + 30);
 }
 
