@@ -114,8 +114,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="imageView" destination="iIf-LX-JfN" id="xda-2O-M19"/>
                                     <outlet property="nameLabel" destination="uaF-kR-AU1" id="CMo-Qz-fnK"/>
+                                    <outlet property="profileImageView" destination="iIf-LX-JfN" id="Nf8-1I-GaF"/>
                                     <outlet property="timeLabel" destination="MzZ-51-XsE" id="Rgn-qi-oV8"/>
                                     <outlet property="tweetLabel" destination="KhZ-VM-X4z" id="2r8-DG-Jcy"/>
                                     <segue destination="Q51-ec-LvJ" kind="push" identifier="TweetView" id="FG2-7F-hUN"/>

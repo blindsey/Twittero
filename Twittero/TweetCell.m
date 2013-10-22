@@ -11,7 +11,7 @@
 
 @interface TweetCell ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tweetLabel;
@@ -38,9 +38,9 @@
     
     // profile pic
     NSURL *url = [NSURL URLWithString:user.profileImageURL];
-    [self.imageView setImageWithURL:url];
-    self.imageView.layer.cornerRadius = 5.0;
-    self.imageView.layer.masksToBounds = YES;
+    [self.profileImageView setImageWithURL:url];
+    self.profileImageView.layer.cornerRadius = 5.0;
+    self.profileImageView.layer.masksToBounds = YES;
     
     [self attributedStringForNameLabel];
     
