@@ -2,7 +2,7 @@
 
 Twittero is a limited clone of the Twitter iPhone App circa October 2013 using storyboards and autolayout. With Twittero you can:
 
-  * View a scrollable timeline view
+  * View your scrollable timeline
   * See details on individual tweets
   * Retweet, favorite, and reply to tweets
   * Compose new tweets from the nav bar
