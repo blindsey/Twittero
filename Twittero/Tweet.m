@@ -17,10 +17,10 @@
         _id = [data objectForKey:@"id_str"];
         _text = [data objectForKey:@"text"];
 
-        static NSDateFormatter *formatter = nil; //cached
+        static NSDateFormatter *formatter = nil; //cached not threadsafe
         if (!formatter) {
             formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"EE MM dd HH:mm:ss ZZZ yyyy"];
+            formatter.dateFormat = @"EE MM dd HH:mm:ss ZZZ yyyy";
         }
         _createdAt = [formatter dateFromString:[data objectForKey:@"created_at"]];
 
@@ -32,8 +32,18 @@
 
         _retweeted = [[data objectForKey:@"retweeted"] integerValue];
         _favorited = [[data objectForKey:@"favorited"] integerValue];
+
+        NSDictionary *retweet = [data objectForKey:@"retweeted_status"];
+        if (retweet) {
+            _retweetedStatus = [[Tweet alloc] initWithDictionary:retweet];
+        }
     }
     return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ %@", self.id, self.text];
 }
 
 + (NSArray *)tweetsWithArray:(NSArray *)array

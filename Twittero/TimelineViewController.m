@@ -80,13 +80,20 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Tweet *tweet = self.tweets[indexPath.row];
+    NSString *text = tweet.text;
+    NSUInteger offset = 30;
+    if (tweet.retweetedStatus) {
+        text = tweet.retweetedStatus.text;
+        offset = 50;
+    }
+
     CGFloat width = self.view.frame.size.width - 79;
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14] };
-    CGRect frame = [tweet.text boundingRectWithSize:CGSizeMake(width, 1000)
-                                            options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                         attributes:attributes
-                                            context:nil];
-    return MAX(68.0, frame.size.height + 30);
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14.0] };
+    CGRect frame = [text boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
+                                      options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
+                                   attributes:attributes
+                                      context:nil];
+    return MAX(68.0, frame.size.height + offset);
 }
 
 #pragma mark - Scroll view delegate
