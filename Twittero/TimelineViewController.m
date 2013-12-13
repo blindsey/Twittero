@@ -91,9 +91,11 @@
         offset = 50;
     }
 
+    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14.0]};
+    NSAttributedString *string = [[NSAttributedString alloc] initWithString:text attributes:attributes];
     CGFloat width = self.view.frame.size.width - 79;
-    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)];
-    return MAX(68.0, size.height + offset);
+    CGRect frame = [string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return MAX(68.0, frame.size.height + offset);
 }
 
 #pragma mark - Scroll view delegate
