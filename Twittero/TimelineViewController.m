@@ -38,8 +38,12 @@
 
     UINavigationBar *bar = [self.navigationController navigationBar];
     [bar setTranslucent:NO];
-    [bar setTintColor:[UIColor whiteColor]];
-    [bar setBarTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
+    if ([bar respondsToSelector:@selector(setBarTintColor:)]) {
+        [bar setTintColor:[UIColor whiteColor]];
+        [bar setBarTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
+    } else {
+        [bar setTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
+    }
     
     NSDictionary *attributes = @{ UITextAttributeTextColor : [UIColor whiteColor],
                                   UITextAttributeFont : [UIFont boldSystemFontOfSize:20] };
@@ -88,12 +92,8 @@
     }
 
     CGFloat width = self.view.frame.size.width - 79;
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont systemFontOfSize:14.0] };
-    CGRect frame = [text boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
-                                      options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading
-                                   attributes:attributes
-                                      context:nil];
-    return MAX(68.0, frame.size.height + offset);
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14.0] constrainedToSize:CGSizeMake(width, CGFLOAT_MAX)];
+    return MAX(68.0, size.height + offset);
 }
 
 #pragma mark - Scroll view delegate
