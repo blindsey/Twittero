@@ -26,11 +26,29 @@
 
 @implementation TimelineViewController
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    [self setup];
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self setup];
+    return self;
+}
+
+- (void)setup
+{
+    // Custom initialization
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
-    self.title = @"";
     UIImage *image = [UIImage imageNamed:@"twitter"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     [imageView setContentMode:UIViewContentModeScaleAspectFit];
@@ -39,9 +57,10 @@
     UINavigationBar *bar = [self.navigationController navigationBar];
     [bar setTranslucent:NO];
     if ([bar respondsToSelector:@selector(setBarTintColor:)]) {
+        self.title = @""; // hide Back text in iOS7 nav bar
         [bar setTintColor:[UIColor whiteColor]];
         [bar setBarTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
-    } else {
+    } else { // iOS6
         [bar setTintColor:[UIColor colorWithRed:85.0/255 green:172.0/255 blue:238.0/255 alpha:1.0]];
     }
     
@@ -59,12 +78,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBarHidden = NO;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source

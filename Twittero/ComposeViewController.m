@@ -30,37 +30,36 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    [self setup];
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self setup];
+    return self;
+}
+
+- (void)setup
+{
+    // Custom initialization
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
-    self.textView.delegate = self;
-}
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
     User *user = [User currentUser];
-    
+
     NSURL *url = [NSURL URLWithString:user.profileImageURL];
     [self.imageView setImageWithURL:url];
     self.imageView.layer.cornerRadius = 5.0;
     self.imageView.layer.masksToBounds = YES;
-    
+
     self.nameLabel.text = user.name;
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.screenName];
-    
+
     if (self.tweet) {
         NSMutableString *string = [[NSMutableString alloc] init];
         [string appendString:[NSString stringWithFormat:@"@%@ ", self.tweet.user.screenName]];
@@ -73,6 +72,11 @@
     }
     [self textViewDidChange:self.textView];
     [self.textView becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (void)textViewDidChange:(UITextView *)textView

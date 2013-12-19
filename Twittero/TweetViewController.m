@@ -34,10 +34,20 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    [self setup];
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self setup];
+    return self;
+}
+
+- (void)setup
+{
+    // Custom initialization
 }
 
 - (void)viewDidLoad
@@ -45,22 +55,19 @@
     [super viewDidLoad];
     [self.retweetButton setImage:[UIImage imageNamed:@"retweeted"] forState:UIControlStateSelected|UIControlStateDisabled];
     [self.favoriteButton setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateSelected];
-}
 
-- (void)viewWillAppear:(BOOL)animated
-{
     User *user = self.tweet.user;
-    
+
     NSURL *url = [NSURL URLWithString:user.profileImageURL];
     [self.imageView setImageWithURL:url];
     self.imageView.layer.cornerRadius = 5.0;
     self.imageView.layer.masksToBounds = YES;
-    
+
     self.nameLabel.text = user.name;
     self.usernameLabel.text = [NSString stringWithFormat:@"@%@", user.screenName];
-    
+
     self.tweetLabel.text = self.tweet.text;
-    
+
     static NSDateFormatter *formatter = nil; //cached
     if (formatter == nil) {
         formatter = [[NSDateFormatter alloc] init];
@@ -68,18 +75,12 @@
         [formatter setDateStyle:NSDateFormatterShortStyle];
     }
     self.timeLabel.text = [formatter stringFromDate:self.tweet.createdAt];
-    
+
     [self attributedStringForStatsLabel];
-    
+
     self.retweetButton.enabled = !self.tweet.retweeted;
     self.retweetButton.selected = self.tweet.retweeted;
     self.favoriteButton.selected = self.tweet.favorited;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

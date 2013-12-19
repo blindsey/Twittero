@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-370" y="602"/>
+            <point key="canvasLocation" x="-1178" y="526"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="GeI-gW-02x">
@@ -151,7 +151,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftj-37-Syq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-869" y="1252"/>
+            <point key="canvasLocation" x="-865" y="1252"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="JeH-Tv-0Wn">
@@ -180,7 +180,7 @@
                                     <action selector="onCancelButton" destination="cx8-ZH-K81" eventType="touchUpInside" id="M8V-Mx-HyR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meg-7F-Yil">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meg-7F-Yil">
                                 <rect key="frame" x="256" y="24" width="52" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -189,7 +189,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Tweet">
-                                    <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -248,10 +248,17 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cx8-ZH-K81" id="g1T-qX-AYV"/>
+                                </connections>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="What's happening?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jU-Dh-y4W">
-                                <rect key="frame" x="15" y="130" width="149" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's happening?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jU-Dh-y4W">
+                                <rect key="frame" x="20" y="130" width="149" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="149" id="gMl-s0-NnG"/>
+                                    <constraint firstAttribute="height" constant="21" id="tfg-F0-4Au"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -264,7 +271,9 @@
                             <constraint firstItem="8dd-z0-BEg" firstAttribute="top" secondItem="7vy-gT-bgE" secondAttribute="bottom" constant="8" id="6QO-hz-TKb"/>
                             <constraint firstItem="gy9-B6-LMv" firstAttribute="top" secondItem="oLM-7N-f17" secondAttribute="bottom" constant="29" id="6rZ-ou-N96"/>
                             <constraint firstItem="meg-7F-Yil" firstAttribute="leading" secondItem="8dd-z0-BEg" secondAttribute="trailing" constant="20" id="ChY-Nm-chD"/>
+                            <constraint firstItem="8jU-Dh-y4W" firstAttribute="top" secondItem="Ogj-Sk-3pO" secondAttribute="bottom" constant="12" id="DbH-gy-qdQ"/>
                             <constraint firstItem="a5G-VI-Mdi" firstAttribute="leading" secondItem="Ogj-Sk-3pO" secondAttribute="trailing" constant="11" id="JA0-Ab-dpj"/>
+                            <constraint firstItem="8jU-Dh-y4W" firstAttribute="leading" secondItem="o7i-GU-sVm" secondAttribute="leading" constant="20" id="K15-6n-q8N"/>
                             <constraint firstAttribute="trailing" secondItem="meg-7F-Yil" secondAttribute="trailing" constant="12" id="KQU-Ru-Vs4"/>
                             <constraint firstItem="oLM-7N-f17" firstAttribute="leading" secondItem="o7i-GU-sVm" secondAttribute="leading" id="Qr0-76-VIr"/>
                             <constraint firstItem="Ogj-Sk-3pO" firstAttribute="top" secondItem="oLM-7N-f17" secondAttribute="bottom" constant="12" id="Qrg-EC-oCQ"/>
@@ -296,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JdP-SC-hTx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="253" y="1252"/>
+            <point key="canvasLocation" x="197" y="1252"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pnw-pl-n1E">
@@ -514,7 +523,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vr1-XX-9lQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-358" y="1736"/>
+            <point key="canvasLocation" x="-306" y="516"/>
         </scene>
     </scenes>
     <resources>
